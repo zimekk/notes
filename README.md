@@ -41,4 +41,4 @@ open ios/notes.xcworkspace
 
 ## todo
 
-[ ] https://github.com/friyiajr/D3LineChartSample
+[x] https://github.com/friyiajr/D3LineChartSample
