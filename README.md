@@ -42,8 +42,8 @@ open ios/notes.xcworkspace
 ## todo
 
 [x] https://github.com/friyiajr/D3LineChartSample
-[ ] https://github.com/oblador/react-native-vector-icons
-[ ] https://github.com/react-navigation/react-navigation
+[x] https://github.com/oblador/react-native-vector-icons
+[x] https://github.com/react-navigation/react-navigation
 [ ] https://github.com/react-native-maps/react-native-maps
 [ ] https://github.com/danilowoz/react-content-loader
 [ ] https://github.com/wix/react-native-navigation
@@ -54,6 +54,7 @@ open ios/notes.xcworkspace
 [ ] https://github.com/wix/react-native-calendars
 [ ] https://github.com/react-native-image-picker/react-native-image-picker
 [ ] https://github.com/ptomasroos/react-native-scrollable-tab-view
-[ ] https://github.com/DylanVann/react-native-fast-image
+[x] https://github.com/DylanVann/react-native-fast-image
 [ ] https://github.com/fangwei716/30-days-of-react-native
 [ ] https://github.com/zo0r/react-native-push-notification
+[x] https://github.com/henninghall/react-native-date-picker

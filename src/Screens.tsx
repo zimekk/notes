@@ -1,6 +1,7 @@
 // import {curveBasis, line, scaleLinear, scaleTime} from 'd3';
-import React from 'react';
+import React, {useState} from 'react';
 import {
+  Button,
   Image,
   ScrollView,
   StatusBar,
@@ -8,7 +9,9 @@ import {
   Text,
   View,
 } from 'react-native';
+import DateTimePicker from 'react-native-date-picker';
 import FastImage from 'react-native-fast-image';
+import {format} from 'date-fns';
 import StatusBarUnderlay, {STATUS_BAR_HEIGHT} from './StatusBarUnderlay';
 import {ImageGrid} from './ImageGrid';
 
@@ -42,6 +45,25 @@ export const DefaultImageGrid = () => <ImageGrid ImageComponent={Image} />;
 
 export const FastImageGrid = () => <ImageGrid ImageComponent={FastImage} />;
 
+function Calendar() {
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button title="Open" onPress={() => setOpen(true)} />
+      <Text>{format(date, 'MMMM do, yyyy H:mma')}</Text>
+      <DateTimePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={date => (setOpen(false), setDate(date))}
+        onCancel={() => setOpen(false)}
+      />
+    </>
+  );
+}
+
 export const FastImageExamples = () => (
   <View style={styles.container}>
     <StatusBar
@@ -56,6 +78,7 @@ export const FastImageExamples = () => (
         <Section>
           <Text style={styles.titleText}>🚩 FastImage</Text>
           <FeatureText text="Tap images to reload examples." />
+          <Calendar />
         </Section>
         {/* <PriorityExample />
           <GifExample />
