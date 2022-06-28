@@ -8,13 +8,16 @@
  * @format
  */
 
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
+  Alert,
+  Linking,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -26,6 +29,63 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+// import openURLInBrowser from 'react-native/Libraries/Core/Devtools/openURLInBrowser';
+
+import {WebView} from 'react-native-webview';
+
+function Link({href, children, ...props}: any) {
+  const handlePress = useCallback(async () => {
+    // Checking if the link is supported for links with custom URL scheme.
+    const supported = await Linking.canOpenURL(href);
+
+    if (supported) {
+      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+      // by some browser in the mobile
+      await Linking.openURL(href);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${href}`);
+    }
+  }, [href]);
+
+  return (
+    <TouchableOpacity
+      accessibilityRole="button"
+      // onPress={() => openURLInBrowser(href)}>
+      onPress={handlePress}
+      {...props}>
+      <Text>{children}</Text>
+    </TouchableOpacity>
+  );
+}
+
+function Content() {
+  let href = 'https://github.com/zimekk/';
+  return (
+    <>
+      <Link
+        href={href}
+        style={{
+          alignSelf: 'center',
+          margin: 16,
+          padding: 16,
+          borderWidth: 1,
+          borderColor: 'rgba(27,31,36,0.15)',
+          borderStyle: 'solid',
+          borderRadius: 6,
+          backgroundColor: '#f6f8fa',
+        }}>
+        {href}
+      </Link>
+      <WebView
+        source={{uri: href}}
+        style={{
+          height: 400,
+        }}
+      />
+    </>
+  );
+}
 
 const Section: React.FC<{
   children: React.ReactNode;
@@ -74,6 +134,7 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Content />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
