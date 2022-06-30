@@ -30,6 +30,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Config from 'react-native-config';
+
 // import openURLInBrowser from 'react-native/Libraries/Core/Devtools/openURLInBrowser';
 
 import {WebView} from 'react-native-webview';
@@ -60,7 +62,7 @@ function Link({href, children, ...props}: any) {
 }
 
 function Content() {
-  let href = 'https://github.com/zimekk/';
+  let href = Config.URL;
   return (
     <>
       <Link
