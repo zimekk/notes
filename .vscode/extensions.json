@@ -16,6 +16,7 @@
     // "davidanson.vscode-markdownlint", // markdownlint
     // "christian-kohler.npm-intellisense", // npm Intellisense
     // "prisma.vscode-graphql" // GraphQL
-    "DotJoshJohnson.xml"
+    "DotJoshJohnson.xml", // XML Formatting, XQuery, and XPath Tools
+    "styled-components.vscode-styled-components" // Syntax highlighting for styled-components
   ]
 }
