@@ -30,7 +30,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import styled from 'styled-components/native';
+import styled from 'styled-components';
 
 import Config from 'react-native-config';
 
