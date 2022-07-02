@@ -30,11 +30,17 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import styled from 'styled-components/native';
+
 import Config from 'react-native-config';
 
 // import openURLInBrowser from 'react-native/Libraries/Core/Devtools/openURLInBrowser';
 
 import {WebView} from 'react-native-webview';
+
+const StyledText = styled.Text`
+  color: palevioletred;
+`;
 
 function Link({href, children, ...props}: any) {
   const handlePress = useCallback(async () => {
@@ -44,7 +50,7 @@ function Link({href, children, ...props}: any) {
     if (supported) {
       // Opening the link with some app, if the URL scheme is "http" the web link should be opened
       // by some browser in the mobile
-      await Linking.openURL(href);
+      await Linking.openURL(href).catch(() => null);
     } else {
       Alert.alert(`Don't know how to open this URL: ${href}`);
     }
@@ -56,7 +62,7 @@ function Link({href, children, ...props}: any) {
       // onPress={() => openURLInBrowser(href)}>
       onPress={handlePress}
       {...props}>
-      <Text>{children}</Text>
+      <StyledText>{children}</StyledText>
     </TouchableOpacity>
   );
 }
