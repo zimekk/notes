@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Alert,
   Linking,
@@ -38,7 +38,9 @@ import Config from 'react-native-config';
 
 import {WebView} from 'react-native-webview';
 
-const StyledText = styled.Text`
+import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+
+const StyledText = styled(Text)`
   color: palevioletred;
 `;
 
@@ -67,10 +69,50 @@ function Link({href, children, ...props}: any) {
   );
 }
 
+// https://react-native-async-storage.github.io/async-storage/docs/api/#useasyncstorage
+function Storage() {
+  const [value, setValue] = useState<string | null>('value');
+  const {getItem, setItem} = useAsyncStorage('@storage_key');
+
+  const readItemFromStorage = async () => {
+    const item = await getItem();
+    setValue(item);
+  };
+
+  const writeItemToStorage = async (newValue: string) => {
+    await setItem(newValue);
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    readItemFromStorage();
+  }, []);
+
+  return (
+    <TouchableOpacity
+      onPress={() =>
+        writeItemToStorage(Math.random().toString(36).substr(2, 5))
+      }
+      style={{
+        alignSelf: 'center',
+        margin: 16,
+        padding: 16,
+        borderWidth: 1,
+        borderColor: 'rgba(27,31,36,0.15)',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        backgroundColor: '#f6f8fa',
+      }}>
+      <StyledText>{value ? value : '-'}</StyledText>
+    </TouchableOpacity>
+  );
+}
+
 function Content() {
   let href = Config.URL;
   return (
     <>
+      <Storage />
       <Link
         href={href}
         style={{
