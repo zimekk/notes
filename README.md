@@ -30,6 +30,14 @@ yarn ios
 or
 
 ```sh
+brew install ios-deploy
+xcrun xctrace list devices
+yarn ios --udid "41984DE5-65ED-4852-9D09-725B38E27ABF"
+```
+
+or
+
+```sh
 xed -b ios
 ```
 
