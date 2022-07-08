@@ -6412,6 +6412,11 @@ react-native-reanimated@^2.9.1:
     setimmediate "^1.0.5"
     string-hash-64 "^1.0.3"
 
+react-native-sound-player@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/react-native-sound-player/-/react-native-sound-player-0.12.1.tgz#d8e9dc67d67386c6dfe0607e44afffa391cb54fe"
+  integrity sha512-jkJNz2c1dHV4nQMurR/3asYgZdZYzqmNNkyWmezxmwBBGPAUMiE7REoqUjSxumIOV5R0MzT8efBzl2f4d09iVQ==
+
 react-native-webview@^11.22.5:
   version "11.22.5"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.22.5.tgz#8f661bf6945f1ac7173e06e642712a5c6eaf802e"

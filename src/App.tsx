@@ -37,6 +37,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import SoundPlayer from 'react-native-sound-player';
+
 import styled from 'styled-components';
 
 import Config from 'react-native-config';
@@ -46,6 +48,60 @@ import Config from 'react-native-config';
 import {WebView} from 'react-native-webview';
 
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+
+function AudioScreen() {
+  const [playing, setPlaying] = useState(false);
+
+  const playSong = () => {
+    try {
+      // SoundPlayer.playSoundFile('engagementParty', 'm4a');
+      SoundPlayer.playUrl(
+        'https://radio.stream.smcdn.pl/icradio-p/2380-1.aac/playlist.m3u8',
+        // 'https://stream.open.fm/100'
+      );
+    } catch (e) {
+      Alert.alert('Cannot play the file');
+      console.log('cannot play the song file', e);
+    }
+  };
+
+  const getInfo = async () => {
+    // You need the keyword `async`
+    try {
+      const info = await SoundPlayer.getInfo(); // Also, you need to await this because it is async
+      console.log('getInfo', info); // {duration: 12.416, currentTime: 7.691}
+    } catch (e) {
+      console.log('There is no song playing', e);
+    }
+  };
+
+  useEffect(() => {
+    const subscription = SoundPlayer.addEventListener(
+      'FinishedLoading',
+      ({success}) => {
+        console.log('finished loading', success);
+      },
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  });
+
+  const onPressPlayButton = () => {
+    if (playing) {
+      SoundPlayer.stop();
+      setPlaying(false);
+    } else {
+      playSong();
+      getInfo();
+      setPlaying(true);
+    }
+  };
+  return (
+    <Button onPress={onPressPlayButton} title={playing ? 'Stop' : 'Play'} />
+  );
+}
 
 function AnimatedStyleUpdateExample() {
   const randomWidth = useSharedValue(10);
@@ -156,6 +212,7 @@ function Content() {
   return (
     <>
       <Storage />
+      <AudioScreen />
       <AnimatedStyleUpdateExample />
       <Link
         href={href}
