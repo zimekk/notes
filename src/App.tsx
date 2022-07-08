@@ -13,6 +13,7 @@ import {
   Alert,
   Button,
   Linking,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -37,7 +38,17 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+// import Video from 'react-native-video';
+
 import SoundPlayer from 'react-native-sound-player';
+
+import {
+  AirplayButton,
+  showRoutePicker,
+  useAirplayConnectivity,
+  useAvAudioSessionRoutes,
+  useExternalPlaybackAvailability,
+} from 'react-airplay';
 
 import styled from 'styled-components';
 
@@ -49,6 +60,52 @@ import {WebView} from 'react-native-webview';
 
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
 
+function AirplayScreen() {
+  const isExternalPlaybackAvailable = useExternalPlaybackAvailability({
+    useCachedValue: false,
+  });
+  const isAirplayConnected = useAirplayConnectivity();
+  const routes = useAvAudioSessionRoutes();
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      {/* <Video
+        source={{
+          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        }}
+        style={styles.video}
+        controls={true}
+      /> */}
+      <View>
+        <Text>
+          External playback available: {String(isExternalPlaybackAvailable)}
+        </Text>
+        <Text>Airplay connected: {String(isAirplayConnected)}</Text>
+        <Text>Routes: {JSON.stringify(routes, null, 2)}</Text>
+      </View>
+      <View style={styles.box}>
+        {Platform.OS === 'ios' && (
+          <AirplayButton
+            style={styles.button}
+            prioritizesVideoDevices={false}
+            tintColor="blue"
+            activeTintColor="red"
+          />
+        )}
+      </View>
+      <View>
+        <Button
+          title="Custom Button"
+          onPress={useCallback(
+            () => showRoutePicker({prioritizesVideoDevices: false}),
+            [],
+          )}
+        />
+      </View>
+    </ScrollView>
+  );
+}
+
 function AudioScreen() {
   const [playing, setPlaying] = useState(false);
 
@@ -56,8 +113,9 @@ function AudioScreen() {
     try {
       // SoundPlayer.playSoundFile('engagementParty', 'm4a');
       SoundPlayer.playUrl(
-        'https://radio.stream.smcdn.pl/icradio-p/2380-1.aac/playlist.m3u8',
+        // 'https://radio.stream.smcdn.pl/icradio-p/2380-1.aac/playlist.m3u8'
         // 'https://stream.open.fm/100'
+        'https://n-22-11.dcs.redcdn.pl/sc/o2/Eurozet/live/chillizet.livx',
       );
     } catch (e) {
       Alert.alert('Cannot play the file');
@@ -88,7 +146,7 @@ function AudioScreen() {
     };
   });
 
-  const onPressPlayButton = () => {
+  const onPressPlayButton = useCallback(() => {
     if (playing) {
       SoundPlayer.stop();
       setPlaying(false);
@@ -97,7 +155,7 @@ function AudioScreen() {
       getInfo();
       setPlaying(true);
     }
-  };
+  }, [playing]);
   return (
     <Button onPress={onPressPlayButton} title={playing ? 'Stop' : 'Play'} />
   );
@@ -212,6 +270,7 @@ function Content() {
   return (
     <>
       <Storage />
+      <AirplayScreen />
       <AudioScreen />
       <AnimatedStyleUpdateExample />
       <Link
@@ -307,6 +366,18 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  box: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  button: {
+    width: 100,
+    height: 100,
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,

@@ -104,6 +104,8 @@ PODS:
     - React-RCTSettings (= 0.69.1)
     - React-RCTText (= 0.69.1)
     - React-RCTVibration (= 0.69.1)
+  - react-airplay (1.2.0):
+    - React-Core
   - React-bridging (0.69.1):
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-jsi (= 0.69.1)
@@ -424,6 +426,7 @@ DEPENDENCIES:
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
+  - react-airplay (from `../node_modules/react-airplay`)
   - React-bridging (from `../node_modules/react-native/ReactCommon`)
   - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
   - React-Codegen (from `build/generated/ios`)
@@ -492,6 +495,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
   React:
     :path: "../node_modules/react-native/"
+  react-airplay:
+    :path: "../node_modules/react-airplay"
   React-bridging:
     :path: "../node_modules/react-native/ReactCommon"
   React-callinvoker:
@@ -572,6 +577,7 @@ SPEC CHECKSUMS:
   RCTRequired: ae07282b2ec9c90d7eb98251603bc3f82403d239
   RCTTypeSafety: a04dc1339af2e1da759ccd093bf11c310dce1ef6
   React: dbd201f781b180eab148aa961683943c72f67dcf
+  react-airplay: 8197767f12cae11a7623b1507d29a89482a720ad
   React-bridging: 10a863fdc0fc6f9c9f8527640936b293cd288bdc
   React-callinvoker: 6ad32eee2630dab9023de5df2a6a8cacbfc99a67
   React-Codegen: fe3423fa6f37d05e233ab0e85e34fe0b443a5654
