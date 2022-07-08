@@ -60,6 +60,8 @@ import {WebView} from 'react-native-webview';
 
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
 
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
+
 function AirplayScreen() {
   const isExternalPlaybackAvailable = useExternalPlaybackAvailability({
     useCachedValue: false,
@@ -327,10 +329,134 @@ const Section: React.FC<{
 };
 
 const App = () => {
+  const [permissions, setPermissions] = useState({});
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  const onRemoteNotification = notification => {
+    const isClicked = notification.getData().userInteraction === 1;
+
+    console.log(['onRemoteNotification'], {isClicked});
+
+    if (isClicked) {
+      // Navigate user to another screen
+    } else {
+      // Do something else with push notification
+    }
+  };
+
+  // useEffect(() => {
+  //   const type = 'notification';
+  //   PushNotificationIOS.addEventListener(type, onRemoteNotification);
+  //   return () => {
+  //     PushNotificationIOS.removeEventListener(type);
+  //   };
+  // }, []);
+
+  const onRegistered = deviceToken => {
+    Alert.alert('Registered For Remote Push', `Device Token: ${deviceToken}`, [
+      {
+        text: 'Dismiss',
+        onPress: null,
+      },
+    ]);
+  };
+
+  const onRegistrationError = error => {
+    Alert.alert(
+      'Failed To Register For Remote Push',
+      `Error (${error.code}): ${error.message}`,
+      [
+        {
+          text: 'Dismiss',
+          onPress: null,
+        },
+      ],
+    );
+  };
+
+  const sendLocalNotificationWithSound = () => {
+    PushNotificationIOS.addNotificationRequest({
+      id: 'notificationWithSound',
+      title: 'Sample Title',
+      subtitle: 'Sample Subtitle',
+      body: 'Sample local notification with custom sound',
+      sound: 'customSound.wav',
+      badge: 1,
+    });
+  };
+
+  const scheduleLocalNotification = () => {
+    PushNotificationIOS.scheduleLocalNotification({
+      alertBody: 'Test Local Notification',
+      fireDate: new Date(new Date().valueOf() + 2000).toISOString(),
+    });
+  };
+
+  const onLocalNotification = notification => {
+    const isClicked = notification.getData().userInteraction === 1;
+
+    Alert.alert(
+      'Local Notification Received',
+      `Alert title:  ${notification.getTitle()},
+      Alert subtitle:  ${notification.getSubtitle()},
+      Alert message:  ${notification.getMessage()},
+      Badge: ${notification.getBadgeCount()},
+      Sound: ${notification.getSound()},
+      Thread Id:  ${notification.getThreadID()},
+      Action Id:  ${notification.getActionIdentifier()},
+      User Text:  ${notification.getUserText()},
+      Notification is clicked: ${String(isClicked)}.`,
+      [
+        {
+          text: 'Dismiss',
+          onPress: null,
+        },
+      ],
+    );
+  };
+
+  useEffect(() => {
+    PushNotificationIOS.addEventListener('register', onRegistered);
+    PushNotificationIOS.addEventListener(
+      'registrationError',
+      onRegistrationError,
+    );
+    PushNotificationIOS.addEventListener('notification', onRemoteNotification);
+    PushNotificationIOS.addEventListener(
+      'localNotification',
+      onLocalNotification,
+    );
+
+    PushNotificationIOS.requestPermissions({
+      alert: true,
+      badge: true,
+      sound: true,
+      critical: true,
+    }).then(
+      data => {
+        console.log('PushNotificationIOS.requestPermissions', data);
+      },
+      data => {
+        console.log('PushNotificationIOS.requestPermissions failed', data);
+      },
+    );
+
+    return () => {
+      PushNotificationIOS.removeEventListener('register');
+      PushNotificationIOS.removeEventListener('registrationError');
+      PushNotificationIOS.removeEventListener('notification');
+      PushNotificationIOS.removeEventListener('localNotification');
+    };
+  }, []);
+
+  const showPermissions = () => {
+    PushNotificationIOS.checkPermissions(permissions => {
+      setPermissions({permissions});
+    });
   };
 
   return (
@@ -344,6 +470,21 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <View>
+            <Button
+              onPress={sendLocalNotificationWithSound}
+              title="Send fake local notification with custom sound"
+            />
+            <Button
+              onPress={scheduleLocalNotification}
+              title="Schedule fake local notification"
+            />
+            <Button
+              onPress={showPermissions}
+              title="Show enabled permissions"
+            />
+            <Text>{JSON.stringify(permissions)}</Text>
+          </View>
           <Content />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
