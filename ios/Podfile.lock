@@ -288,7 +288,7 @@ PODS:
     - react-native-config/App (= 1.4.6)
   - react-native-config/App (1.4.6):
     - React-Core
-  - react-native-webview (11.22.4):
+  - react-native-webview (11.22.5):
     - React-Core
   - React-perflogger (0.69.1)
   - React-RCTActionSheet (0.69.1):
@@ -548,7 +548,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 55605caf04e02f9b0e05842b786f1c12dde08f4b
   React-logger: ca970551cb7eea2fd814d0d5f6fc1a471eb53b76
   react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
-  react-native-webview: a1ed211d50a5047a4fe54e07140991e277cd66e6
+  react-native-webview: 28557a39f4c1f3f8faa69dae22858335ba63e7f9
   React-perflogger: c9161ff0f1c769993cd11d2751e4331ff4ceb7cd
   React-RCTActionSheet: 2d885b0bea76a5254ef852939273edd8de116180
   React-RCTAnimation: 353fa4fc3c19060068832dd32e555182ec07be45
