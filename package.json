@@ -67,10 +67,10 @@
   "jest": {
     "preset": "react-native",
     "setupFiles": [
-      "./jestSetup.js"
+      "./jest.setup.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-config|react-native-webview)/)"
+      "node_modules/(?!(@react-native-community/push-notification-ios|@react-native|react-native|react-native-config|react-native-reanimated|react-native-sound-player|react-native-webview)/)"
     ],
     "moduleFileExtensions": [
       "ts",
