@@ -1989,10 +1989,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^28.1.4":
-  version "28.1.4"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-28.1.4.tgz#a11ee6c8fd0b52c19c9c18138b78bbcc201dad5a"
-  integrity sha512-telv6G5N7zRJiLcI3Rs3o+ipZ28EnE+7EvF0pSrt2pZOMnAVI/f+6/LucDxOvcBcTeTL3JMF744BbVQAVBUQRA==
+"@types/jest@^28.1.5":
+  version "28.1.5"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-28.1.5.tgz#4337404efa059adbf96c4ac53b28fdc0af514475"
+  integrity sha512-TLAC2zXxGnohSP3GxgIyJn7yrTeRPDEyVFyCY1NE2wzg392auI+69uk5EPGjUXuhkq/K208J/TWpLG7J8ebIEQ==
   dependencies:
     jest-matcher-utils "^28.0.0"
     pretty-format "^28.0.0"
@@ -6533,15 +6533,15 @@ react-native-screens@^3.15.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-sound-player@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/react-native-sound-player/-/react-native-sound-player-0.12.1.tgz#d8e9dc67d67386c6dfe0607e44afffa391cb54fe"
-  integrity sha512-jkJNz2c1dHV4nQMurR/3asYgZdZYzqmNNkyWmezxmwBBGPAUMiE7REoqUjSxumIOV5R0MzT8efBzl2f4d09iVQ==
+react-native-sound-player@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/react-native-sound-player/-/react-native-sound-player-0.13.0.tgz#babe0a4189e68d14f05de3aeb54d4d1277a92a47"
+  integrity sha512-wMc04tMvJur0RJAk/SgmUYyNSe+f1EWf2ogN7U2wUzvOUwODNqePgv3XFNxmh8vzcyAR+UvQSUanvTVDeFywSg==
 
-react-native-webview@^11.22.5:
-  version "11.22.5"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.22.5.tgz#8f661bf6945f1ac7173e06e642712a5c6eaf802e"
-  integrity sha512-UtFvzJEdlRB3fdXnU14CjHVr11urKc/GqRGEQGWttBNNT5bjcrmEQ98OAq/xIOcKuZZWpJlXjQibJmgpM7b1zQ==
+react-native-webview@^11.22.7:
+  version "11.22.7"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.22.7.tgz#bf0d1755473af6e1af8486e862668fc7530149b4"
+  integrity sha512-IYMElB4fFS6S8LbhivAQfAlW95HorqCK4T3mFKmWsV24iPVTfYoaiA1TNzkRnjw2mMgXDk/QnMeH9IbjBVs1Ag==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
