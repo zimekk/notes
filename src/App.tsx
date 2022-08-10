@@ -1,6 +1,7 @@
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import React, {useEffect} from 'react';
 import {Alert} from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
 import Navigation from './navigation';
 
 export default function App() {
@@ -86,6 +87,8 @@ export default function App() {
         console.log('PushNotificationIOS.requestPermissions failed', data);
       },
     );
+
+    RNBootSplash.hide({fade: true}); // fade
 
     return () => {
       PushNotificationIOS.removeEventListener('register');

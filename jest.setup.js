@@ -12,3 +12,7 @@ jest.mock('@react-native-community/push-notification-ios', () => ({
   requestPermissions: jest.fn(() => Promise.resolve({})),
   // configure: jest.fn()
 }));
+jest.mock('react-native-bootsplash', () => ({
+  hide: jest.fn().mockResolvedValueOnce(),
+  getVisibilityStatus: jest.fn().mockResolvedValue('hidden'),
+}));

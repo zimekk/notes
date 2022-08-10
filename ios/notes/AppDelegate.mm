@@ -1,6 +1,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
 #import "AppDelegate.h"
+#import "RNBootSplash.h" // <- add the header import
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -60,6 +61,9 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   
+  // RNBootSplash
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // <- initialization using the storyboard file name
+
   // Define UNUserNotificationCenter
   UNUserNotificationCenter *center =
       [UNUserNotificationCenter currentNotificationCenter];
